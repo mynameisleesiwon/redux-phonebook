@@ -4,20 +4,21 @@ const initialState = {
 };
 const contactReducer = (state = initialState, action) => {
   let { type, payload } = action;
-  // eslint-disable-next-line default-case
+
   switch (type) {
     case "ADD_CONTACT":
-      state.contact.push({
-        name: payload.name,
-        phoneNumber: payload.phoneNumber,
-      });
-      break;
+      return {
+        ...state,
+        contacts: [
+          ...state.contacts,
+          { name: payload.name, phoneNumber: payload.phoneNumber },
+        ],
+      };
     case "SEARCH_BY_USERNAME":
-      state.keyword = payload.keyword;
-      break;
+      return { ...state, keyword: payload.keyword };
+    default:
+      return state;
   }
-
-  return { ...state };
 };
 
 export default contactReducer;
